@@ -68,6 +68,7 @@ pipeline {
                     sh 'npx lighthouse-ci http://test.daimlerpoc.qacg.cloud --jsonReport --report=.'
                     lighthouseReport('./report.json')
                 }
+                sh 'pkill chrome'
             }
         }
         stage('TAG Stage Environment Stack') {
@@ -120,6 +121,7 @@ pipeline {
                     sh 'npx lighthouse-ci http://stage.daimlerpoc.qacg.cloud --jsonReport --report=.'
                     lighthouseReport('./report.json')
                 }
+                sh 'pkill chrome'
             }
         }
         stage('TAG Prod Environment Stack') {
@@ -170,13 +172,14 @@ pipeline {
                     sh 'npx lighthouse-ci http://daimlerpoc.qacg.cloud --jsonReport --report=.'
                     lighthouseReport('./report.json')
                     }
+                sh 'pkill chrome'
             }
             }
         }
     }
     post {
             always {
-                sh 'pkill chrome'
+
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results-test'],[path: 'allure-results-stage'],[path: 'allure-results-prod']]
             }
         }

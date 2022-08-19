@@ -5,7 +5,7 @@ Then('Espero {int} segundos',{timeout: 60 * 1000}, function (int1) {
 });
 Given(/^Abro el portal "([^"]*)"$/, function (str1) {
   if (str1 === "DealersWebTest") {
-    return this.driver.get('http://daimlerpoc.qacg.cloud');
+    return this.driver.get('http://test.daimlerpoc.qacg.cloud');
   }else if (str1 === "DealersWebStage"){
     return this.driver.get('http://stage.daimlerpoc.qacg.cloud');
   }else if (str1 === "DealersWebProd"){

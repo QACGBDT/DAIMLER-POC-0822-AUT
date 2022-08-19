@@ -2,7 +2,7 @@
 Feature: Pagina de login
 
 
-  @prod @environment:prod
+  @prod @message:prod
   Scenario: Happy Path
     Given Abro el portal "DealersWebProd"
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
@@ -10,26 +10,26 @@ Feature: Pagina de login
     Then Hago click en el boton "Iniciar Sesion"
     Then Espero 3 segundos
 
-  @prod @environment:prod
-  Scenario: error
+  @prod @message:prod
+  Scenario: Email incorrecto
     Given Abro el portal "DealersWebProd"
-    Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
+    Then Ingreso "admin123@qacg.com" en el campo "Correo electronico"
     Then Ingreso "T3mporal" en el campo "Contraseña"
     Then Hago click en el boton "Iniciar Sesion"
     Then Espero 3 segundos
 
-  @prod @feature:prod
-  Scenario: Happy Path
+  @prod @message:prod
+  Scenario: Contraseña incorrecta
     Given Abro el portal "DealersWebProd"
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
-    Then Ingreso "T3mporal" en el campo "Contraseña"
+    Then Ingreso "T3mporal123" en el campo "Contraseña"
     Then Hago click en el boton "Iniciar Sesion"
     Then Espero 3 segundos
 
-  @prod @feature:prod
-  Scenario: Happy Path
+  @prod @message:prod
+  Scenario: Email y contraseña incorrecta
     Given Abro el portal "DealersWebProd"
-    Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
-    Then Ingreso "T3mporal" en el campo "Contraseña"
+    Then Ingreso "admin123@qacg.com" en el campo "Correo electronico"
+    Then Ingreso "T3mporal123" en el campo "Contraseña"
     Then Hago click en el boton "Iniciar Sesion"
     Then Espero 3 segundos

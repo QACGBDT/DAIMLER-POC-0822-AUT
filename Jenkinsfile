@@ -64,6 +64,11 @@ pipeline {
                 sh 'cp features/support/reporter/categories.json allure-results-test/categories.json'
                 sh 'npm install'
                 sh 'npm run e2e-test'
+                script{
+                    sh 'npx lighthouse-ci http://test.daimlerpoc.qacg.cloud --jsonReport --report=.'
+                    lighthouseReport('./report.json')
+                }
+                sh 'pkill chrome'
             }
         }
         stage('TAG Stage Environment Stack') {
@@ -112,6 +117,11 @@ pipeline {
                 sh 'cp features/support/reporter/categories.json allure-results-stage/categories.json'
                 sh 'npm install'
                 sh 'npm run e2e-stage'
+                script{
+                    sh 'npx lighthouse-ci http://stage.daimlerpoc.qacg.cloud --jsonReport --report=.'
+                    lighthouseReport('./report.json')
+                }
+                sh 'pkill chrome'
             }
         }
         stage('TAG Prod Environment Stack') {
@@ -158,12 +168,18 @@ pipeline {
                 sh 'cp features/support/reporter/categories.json allure-results-prod/categories.json'
                 sh 'npm install'
                 sh 'npm run e2e-prod'
+                script{
+                    sh 'npx lighthouse-ci http://daimlerpoc.qacg.cloud --jsonReport --report=.'
+                    lighthouseReport('./report.json')
+                    }
+                sh 'pkill chrome'
             }
             }
         }
     }
     post {
             always {
+
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results-test'],[path: 'allure-results-stage'],[path: 'allure-results-prod']]
             }
         }

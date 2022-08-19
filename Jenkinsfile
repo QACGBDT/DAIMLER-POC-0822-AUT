@@ -60,11 +60,10 @@ pipeline {
             steps {
                 sh "rm -f -R allure-results"
                 sh "mkdir allure-results"
-                sh 'cp features/support/reporter/environment.xml allure-results/environment.xml'
-                sh 'cp features/support/reporter/categories.json allure-results/categories.json'
+                sh 'cp features/support/reporter/environment.xml allure-results-test/environment.xml'
+                sh 'cp features/support/reporter/categories.json allure-results-test/categories.json'
                 sh 'npm install'
                 sh 'npm run e2e-test'
-
             }
         }
         stage('TAG Stage Environment Stack') {
@@ -106,9 +105,13 @@ pipeline {
             when {
                 expression { BRANCH_NAME ==~ /(main|stage)/ }
             }
-                    steps {
-                        echo 'test'
-                    }
+            steps {
+                sh 'mkdir allure-results-stage'
+                sh 'cp features/support/reporter/environment.xml allure-results-stage/environment.xml'
+                sh 'cp features/support/reporter/categories.json allure-results-stage/categories.json'
+                sh 'npm install'
+                sh 'npm run e2e-stage'
+            }
         }
         stage('TAG Prod Environment Stack') {
             when {
@@ -147,13 +150,19 @@ pipeline {
                 expression { BRANCH_NAME ==~ /(main)/ }
             }
             steps {
-                echo 'test'
+            steps {
+                sh 'mkdir allure-results-prod'
+                sh 'cp features/support/reporter/environment.xml allure-results-prod/environment.xml'
+                sh 'cp features/support/reporter/categories.json allure-results-prod/categories.json'
+                sh 'npm install'
+                sh 'npm run e2e-prod'
+            }
             }
         }
     }
     post {
             always {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results-test'],[path: 'allure-results-stage'],[path: 'allure-results-prod']]
             }
         }
 }

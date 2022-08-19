@@ -1,10 +1,10 @@
 const { CucumberJSAllureFormatter } = require("allure-cucumberjs");
 const { AllureRuntime } = require("allure-cucumberjs");
 
-function Reporter(options) {
+function TestReporter(options) {
     return new CucumberJSAllureFormatter(
         options,
-        new AllureRuntime({ resultsDir: "./allure-results" }),
+        new AllureRuntime({ resultsDir: "./allure-results-test" }),
         {
             labels: [
                 {
@@ -18,7 +18,7 @@ function Reporter(options) {
             ]}
     );
 }
-Reporter.prototype = Object.create(CucumberJSAllureFormatter.prototype);
-Reporter.prototype.constructor = Reporter;
+TestReporter.prototype = Object.create(CucumberJSAllureFormatter.prototype);
+TestReporter.prototype.constructor = TestReporter;
 
-exports.default = Reporter;
+exports.default = TestReporter;

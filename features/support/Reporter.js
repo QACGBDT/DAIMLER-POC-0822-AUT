@@ -5,7 +5,17 @@ function Reporter(options) {
     return new CucumberJSAllureFormatter(
         options,
         new AllureRuntime({ resultsDir: "./allure-results" }),
-        {}
+        {
+            labels: [
+                {
+                    pattern: [/@environment:(.*)/],
+                    name: "category"
+                },
+                {
+                    pattern: [/@severity:(.*)/],
+                    name: "severity"
+                }
+            ]}
     );
 }
 Reporter.prototype = Object.create(CucumberJSAllureFormatter.prototype);

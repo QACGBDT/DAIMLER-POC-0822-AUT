@@ -176,6 +176,7 @@ pipeline {
     }
     post {
             always {
+                sh 'pkill chrome'
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results-test'],[path: 'allure-results-stage'],[path: 'allure-results-prod']]
             }
         }

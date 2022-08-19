@@ -64,7 +64,6 @@ pipeline {
                 sh 'npm e2e-test'
             }
         }
-   }
         stage('TAG Stage Environment Stack') {
             when {
                 expression { BRANCH_NAME ==~ /(main|stage)/ }

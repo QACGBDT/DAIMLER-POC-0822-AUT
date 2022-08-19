@@ -4,7 +4,7 @@ Feature: Pagina de login
 
   @stage @message:stage
   Scenario: Happy Path
-    Given Abro el portal "DealersWebTest"
+    Given Abro el portal "DealersWebStage"
     Then Espero 3 segundos
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
     Then Ingreso "T3mporal" en el campo "Contraseña"

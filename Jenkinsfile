@@ -69,7 +69,7 @@ pipeline {
                 sh 'docker image tag daimler-poc/web daimler-poc/web-stage'
                 sh 'docker image tag daimler-poc/api daimler-poc/api-stage'
                 sh 'docker image rm daimler-poc/api'
-                sh 'docker image rm daimler-poc/api'
+                sh 'docker image rm daimler-poc/web'
             }
         }
         stage('Clean and prune Stage Environment') {

@@ -60,7 +60,8 @@ pipeline {
             steps {
                 sh "rm -f -R allure-results"
                 sh "mkdir allure-results"
-                sh 'cp environment.xml allure-results/environment.xml'
+                sh 'cp features/support/reporter/environment.xml allure-results/environment.xml'
+                sh 'cp features/support/reporter/categories.json allure-results/categories.json'
                 sh 'npm install'
                 sh 'npm run e2e-test'
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]

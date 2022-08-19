@@ -1,16 +1,4 @@
 const { Then, Given } = require('@cucumber/cucumber');
-
-  Then('Selecciono {genero} como mi genero',{timeout: 60 * 1000}, function (str1) {
-    if (str1 === "masculino"){
-      return this.driver.findElement({id:"male"}).click();
-    }
-    else{
-      return this.driver.findElement({id:"female"}).click();
-    }
-  });
-  Then('Ingreso mi numero exterior',{timeout: 60 * 1000}, function () {
-  return this.driver.findElement({id:"outdoorNumber"}).sendKeys('613');
-  })
 Then('Espero {int} segundos',{timeout: 60 * 1000}, function (int1) {
   return this.driver.sleep(int1*1000)
 });

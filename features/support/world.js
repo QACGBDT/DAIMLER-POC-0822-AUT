@@ -1,10 +1,7 @@
-// This file sets up the environment for tests in cucumber js.
-
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
-const firefox = require('selenium-webdriver/firefox');
-var until = webdriver.until;
-var Condition = webdriver.Condition;
+const until = webdriver.until;
+const Condition = webdriver.Condition;
 const {setWorldConstructor, World } = require('@cucumber/cucumber')
 const screen = {
   width: 1920,
@@ -19,9 +16,6 @@ until.elementIsNotPresent = function elementIsNotPresent(locator) {
 };
 class CustomWorld extends World {
   driver = new webdriver.Builder()
-      .forBrowser('chrome')
-      .setChromeOptions(new chrome.Options().headless().windowSize(screen))
-      .build();
+      .forBrowser('chrome').setChromeOptions(new chrome.Options().headless().windowSize(screen)).build();
 }
-
 setWorldConstructor(CustomWorld)

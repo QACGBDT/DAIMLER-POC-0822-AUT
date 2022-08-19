@@ -16,6 +16,8 @@ until.elementIsNotPresent = function elementIsNotPresent(locator) {
 };
 class CustomWorld extends World {
   driver = new webdriver.Builder()
-      .forBrowser('chrome').setChromeOptions(new chrome.Options().headless().windowSize(screen)).build();
+      .forBrowser('chrome')
+      .setChromeOptions(new chrome.Options().headless().windowSize(screen).addArguments("no-sandbox"))
+      .build();
 }
 setWorldConstructor(CustomWorld)

@@ -1,23 +1,23 @@
 version: "3.8"
 services:
   frontend:
-    container_name: daimler-poc-web-test
+    container_name: daimler-poc-web-stage
     image: daimler-poc/web
     ports:
-      - "7080:80"
+      - "7180:80"
     networks:
-      front-tier-test:
+      front-tier-stage:
         ipv4_address: 172.16.238.10
   backend:
-    container_name: daimler-poc-api-test
+    container_name: daimler-poc-api-stage
     image: daimler-poc/api
     ports:
-      - "7081:8081"
+      - "7181:8081"
     networks:
-      front-tier-test:
+      front-tier-stage:
         ipv4_address: 172.16.238.11
 networks:
-  front-tier-test:
+  front-tier-stage:
     ipam:
       driver: default
       config:

@@ -20,8 +20,8 @@ pipeline {
                     sh 'docker container stop daimler-poc-web-test'
                     sh 'docker container stop daimler-poc-api-test'
                 }
-                sh 'docker container prune'
-
+                sh 'docker container prune -f'
+                sh 'docker network prune -f'
             }
         }
         stage('Deploy Test Environment Stack') {
@@ -65,18 +65,6 @@ pipeline {
                     steps {
                         echo 'test'
                     }
-        }
-        stage('Prod Deploy?') {
-            when {
-                expression { BRANCH_NAME ==~ /(main)/ }
-            }
-            input {
-                message "Desplegar a produccion?"
-                ok "Si, continuar."
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
         }
         stage('Deploy Prod Environment Stack') {
             when {

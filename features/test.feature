@@ -2,8 +2,8 @@
 Feature: Pagina de login
 
 
-  @test @host:test
-  Scenario: test.Happy Path
+  @test @category:test
+  Scenario: Happy Path
     Given Abro el portal "DealersWebTest"
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
     Then Ingreso "T3mporal" en el campo "Contraseña"
@@ -11,23 +11,23 @@ Feature: Pagina de login
     Then Espero 3 segundos
 
   @test @host:test
-  Scenario: test.error
+  Scenario: error
     Given Abro el portal "DealersWebTest"
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
     Then Ingreso "T3mporal" en el campo "Contraseña"
     Then Hago click en el boton "Iniciar Sesion"
     Then Espero 3 segundos
 
-  @test @host:test
-  Scenario: stage.Happy Path
+  @test @host:test=test
+  Scenario: Happy Path
     Given Abro el portal "DealersWebTest"
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
     Then Ingreso "T3mporal" en el campo "Contraseña"
     Then Hago click en el boton "Iniciar Sesion"
     Then Espero 3 segundos
 
-  @test @host:test
-  Scenario: prod.Happy Path
+  @test @category:test=test
+  Scenario: Happy Path
     Given Abro el portal "DealersWebTest"
     Then Ingreso "admin@qacg.com" en el campo "Correo electronico"
     Then Ingreso "T3mporal" en el campo "Contraseña"

@@ -8,12 +8,12 @@ function Reporter(options) {
         {
             labels: [
                 {
-                    pattern: [/@environment:(.*)/],
-                    name: "category"
+                    pattern: [/@category:(.*)/],
+                    name: "categories"
                 },
                 {
-                    pattern: [/@severity:(.*)/],
-                    name: "severity"
+                    pattern: [/@host:(.*)/],
+                    name: "host"
                 }
             ]}
     );

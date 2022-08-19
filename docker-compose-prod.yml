@@ -2,7 +2,7 @@ version: "3.8"
 services:
   frontend:
     container_name: daimler-poc-web-prod
-    image: daimler-poc/web
+    image: daimler-poc/web-prod
     ports:
       - "7280:80"
     networks:
@@ -10,7 +10,7 @@ services:
         ipv4_address: 172.16.238.10
   backend:
     container_name: daimler-poc-api-prod
-    image: daimler-poc/api
+    image: daimler-poc/api-prod
     ports:
       - "7281:8081"
     networks:

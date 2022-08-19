@@ -41,6 +41,17 @@ pipeline {
                         echo 'test'
                     }
         }
+        stage('TAG Stage Environment Stack') {
+            when {
+                expression { BRANCH_NAME ==~ /(main)/ }
+            }
+            steps {
+                sh 'docker image tag daimler-poc/web daimler-poc/web-stage'
+                sh 'docker image tag daimler-poc/api daimler-poc/api-stage'
+                sh 'docker image rm daimler-poc/api'
+                sh 'docker image rm daimler-poc/api'
+            }
+        }
         stage('Clean and prune Stage Environment') {
             when {
                 expression { BRANCH_NAME ==~ /(main|stage)/ }
@@ -66,12 +77,15 @@ pipeline {
                         echo 'test'
                     }
         }
-        stage('Deploy Prod Environment Stack') {
+        stage('TAG Prod Environment Stack') {
             when {
                 expression { BRANCH_NAME ==~ /(main)/ }
             }
             steps {
-                echo 'test'
+                sh 'docker image tag daimler-poc/web-stage daimler-poc/web-prod'
+                sh 'docker image tag daimler-poc/api-stage daimler-poc/api-prod'
+                sh 'docker image rm daimler-poc/api-stage'
+                sh 'docker image rm daimler-poc/web-stage'
             }
         }
         stage('E2E Prod Environment Stack') {

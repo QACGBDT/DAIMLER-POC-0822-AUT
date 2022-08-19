@@ -161,7 +161,6 @@ pipeline {
                 expression { BRANCH_NAME ==~ /(main)/ }
             }
             steps {
-            steps {
                 sh "rm -f -R allure-results-prod"
                 sh 'mkdir allure-results-prod'
                 sh 'cp features/support/reporter/environment.xml allure-results-prod/environment.xml'
@@ -173,7 +172,6 @@ pipeline {
                     lighthouseReport('./report.json')
                     }
                 sh 'pkill chrome'
-            }
             }
         }
     }

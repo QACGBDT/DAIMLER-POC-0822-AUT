@@ -59,8 +59,8 @@ pipeline {
             }
             steps {
                 sh "rm -f -R allure-results"
-                sh 'echo \'<environment><parameter><key>Browser</key><value>Chrome</value></parameter><parameter><key>Browser.Version</key><value>63.0</value></parameter><parameter><key>Stand</key><value>Production</value></parameter></environment>\' > environment.xml'
                 sh "mkdir allure-results"
+                sh 'cp environment.xml allure-results/environment.xml'
                 sh 'npm install'
                 sh 'npm run e2e-test'
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]

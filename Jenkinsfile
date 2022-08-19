@@ -57,10 +57,14 @@ pipeline {
             when {
                 expression { BRANCH_NAME ==~ /(main|stage|test)/ }
             }
-                    steps {
-                        echo 'test'
-                    }
+            steps {
+                sh "rm -f -R allure-results"
+                sh "mkdir allure-results"
+                sh 'npm install'
+                sh 'npm e2e-test'
+            }
         }
+   }
         stage('TAG Stage Environment Stack') {
             when {
                 expression { BRANCH_NAME ==~ /(main|stage)/ }

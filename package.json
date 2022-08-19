@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "Minimal project to show how to setup  [cucumber](http: //cukes.info/) for nodejs environment",
   "scripts": {
-    "test": "./node_modules/.bin/cucumber-js"
+    "e2e-test": "./node_modules/.bin/cucumber.js --tags \"@test\"",
+    "e2e-stage": "./node_modules/.bin/cucumber.js --tags \"@test\"",
+    "e2e-prod": "./node_modules/.bin/cucumber.js --tags \"@test\"",
+    "lint-e2e": "./node_modules/.bin/cucumber.js --tags \"@test\""
   },
   "keywords": [
     "cucumberjs",

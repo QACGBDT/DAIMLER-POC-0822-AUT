@@ -22,6 +22,6 @@ Then(/^Ingreso "([^"]*)" en el campo "([^"]*)"$/, function (str1,str2) {
 });
 Then(/^Hago click en el boton "([^"]*)"$/, function (str1) {
   if (str1 === "Iniciar Sesion"){
-    return this.driver.findElement(By.xpath("//button/span[contains(., 'Iniciar Sesi')]")).click();
+    return this.driver.findElement(By.xpath("//button[contains(., 'Iniciar')]")).click();
   }
 });

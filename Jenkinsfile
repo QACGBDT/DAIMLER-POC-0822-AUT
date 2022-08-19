@@ -1,6 +1,6 @@
 pipeline {
     agent {
-      label 'root'
+        label 'root'
     }
     stages {
         stage('Linting Check E2E Test Suite') {
@@ -11,6 +11,26 @@ pipeline {
                 echo 'test'
             }
         }
+        stage('Build Docker Images') {
+            parallel {
+                stage('Web Image') {
+                    agent {
+                        label "root"
+                    }
+                    steps {
+                        build 'QACG/DAIMLER-POC-0822-WEB/main/'
+                    }
+                }
+                stage('BackEnd Image') {
+                    agent {
+                        label "root"
+                    }
+                    steps {
+                        build 'QACG/DAIMLER-POC-0822-API/main/'
+                    }
+                }
+            }
+         }
         stage('Clean and prune Test Environment') {
             when {
                 expression { BRANCH_NAME ==~ /(main|stage|test)/ }
@@ -43,13 +63,13 @@ pipeline {
         }
         stage('TAG Stage Environment Stack') {
             when {
-                expression { BRANCH_NAME ==~ /(main)/ }
+                expression { BRANCH_NAME ==~ /(main|stage)/ }
             }
             steps {
                 sh 'docker image tag daimler-poc/web daimler-poc/web-stage'
                 sh 'docker image tag daimler-poc/api daimler-poc/api-stage'
                 sh 'docker image rm daimler-poc/api'
-                sh 'docker image rm daimler-poc/api'
+                sh 'docker image rm daimler-poc/web'
             }
         }
         stage('Clean and prune Stage Environment') {
@@ -57,7 +77,14 @@ pipeline {
                 expression { BRANCH_NAME ==~ /(main|stage)/ }
             }
             steps {
-                echo 'test'
+                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS'){
+                    sh 'docker container stop daimler-poc-web-stage'
+                }
+                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS'){
+                    sh 'docker container stop daimler-poc-api-stage'
+                }
+                sh 'docker container prune -f'
+                sh 'docker network prune -f'
             }
         }
         stage('Deploy Stage Environment Stack') {
@@ -65,7 +92,7 @@ pipeline {
                 expression { BRANCH_NAME ==~ /(main|stage)/ }
             }
             steps {
-                echo 'test'
+                step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose-stage.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: true])
             }
         }
 
@@ -86,6 +113,27 @@ pipeline {
                 sh 'docker image tag daimler-poc/api-stage daimler-poc/api-prod'
                 sh 'docker image rm daimler-poc/api-stage'
                 sh 'docker image rm daimler-poc/web-stage'
+            }
+        }
+        stage('Clean and prune Prod Environment') {
+            when {
+                expression { BRANCH_NAME ==~ /(main)/ }
+            }
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS'){
+                    sh 'docker container stop daimler-poc-web-prod'
+                    sh 'docker container stop daimler-poc-api-prod'
+                }
+                sh 'docker container prune -f'
+                sh 'docker network prune -f'
+            }
+        }
+        stage('Deploy Prod Environment Stack') {
+            when {
+                expression { BRANCH_NAME ==~ /(main)/ }
+            }
+            steps {
+                step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose-prod.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: true])
             }
         }
         stage('E2E Prod Environment Stack') {

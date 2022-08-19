@@ -7,7 +7,7 @@ services:
       - "7280:80"
     networks:
       front-tier-prod:
-        ipv4_address: 172.16.238.10
+        ipv4_address: 172.16.240.10
   backend:
     container_name: daimler-poc-api-prod
     image: daimler-poc/api-prod
@@ -15,11 +15,10 @@ services:
       - "7281:8081"
     networks:
       front-tier-prod:
-        ipv4_address: 172.16.238.11
+        ipv4_address: 172.16.240.11
 networks:
   front-tier-prod:
     ipam:
       driver: default
       config:
-        - subnet: "172.16.238.0/24"
-        - subnet: "2001:3984:3989::/64"
+        - subnet: "172.16.240.0/24"

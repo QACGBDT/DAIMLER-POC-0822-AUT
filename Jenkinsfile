@@ -64,7 +64,7 @@ pipeline {
                 sh 'cp features/support/reporter/categories.json allure-results/categories.json'
                 sh 'npm install'
                 sh 'npm run e2e-test'
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+
             }
         }
         stage('TAG Stage Environment Stack') {
@@ -151,4 +151,9 @@ pipeline {
             }
         }
     }
+    post {
+            always {
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            }
+        }
 }

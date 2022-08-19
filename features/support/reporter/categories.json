@@ -3,15 +3,5 @@
     "name": "Test environment",
     "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
     "messageRegex": ".*bye-bye.*"
-  },
-  {
-    "name": "Stage environment",
-    "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
-    "traceRegex": ".*FileNotFoundException.*"
-  },
-  {
-    "name": "Production environment",
-    "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
-    "messageRegex":
   }
 ]

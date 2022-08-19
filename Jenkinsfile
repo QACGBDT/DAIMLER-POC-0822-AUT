@@ -61,7 +61,7 @@ pipeline {
                 sh "rm -f -R allure-results"
                 sh "mkdir allure-results"
                 sh 'npm install'
-                sh 'npm e2e-test'
+                sh 'npm run e2e-test'
             }
         }
         stage('TAG Stage Environment Stack') {

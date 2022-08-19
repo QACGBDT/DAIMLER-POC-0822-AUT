@@ -63,7 +63,7 @@ pipeline {
         }
         stage('TAG Stage Environment Stack') {
             when {
-                expression { BRANCH_NAME ==~ /(main)/ }
+                expression { BRANCH_NAME ==~ /(main|stage)/ }
             }
             steps {
                 sh 'docker image tag daimler-poc/web daimler-poc/web-stage'

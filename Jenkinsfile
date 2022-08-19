@@ -79,6 +79,8 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS'){
                     sh 'docker container stop daimler-poc-web-stage'
+                }
+                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS'){
                     sh 'docker container stop daimler-poc-api-stage'
                 }
                 sh 'docker container prune -f'

@@ -9,11 +9,11 @@ function Reporter(options) {
             labels: [
                 {
                     pattern: [/@category:(.*)/],
-                    name: "categories"
+                    name: "category"
                 },
                 {
-                    pattern: [/@host:(.*)/],
-                    name: "host"
+                    pattern: [/@message:(.*)/],
+                    name: "message"
                 }
             ]}
     );

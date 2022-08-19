@@ -22,7 +22,6 @@ pipeline {
                 }
                 sh 'docker container prune -f'
                 sh 'docker network prune -f'
-
             }
         }
         stage('Deploy Test Environment Stack') {

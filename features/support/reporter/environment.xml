@@ -1,0 +1,11 @@
+<environment>
+    <parameter>
+        <key>Browser</key>
+        <value>Chrome</value>
+    </parameter>
+    <parameter>
+        <key>Browser.Version</key>
+        <value>63.0</value>
+    </parameter>
+</environment>
+

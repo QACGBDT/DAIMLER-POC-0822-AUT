@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Test environment",
+    "matchedStatuses": ["failed", "broken", "passed", "skipped", "unknown"],
+    "messageRegex": ".*test.*"
+  }
+]

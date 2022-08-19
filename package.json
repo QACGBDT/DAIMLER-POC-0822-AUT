@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "Minimal project to show how to setup  [cucumber](http: //cukes.info/) for nodejs environment",
   "scripts": {
-    "test": "./node_modules/.bin/cucumber-js"
+    "e2e-test": "./node_modules/.bin/cucumber-js --tags \"@test\" --format ./features/support/reporter/test-reporter.js",
+    "e2e-stage": "./node_modules/.bin/cucumber-js --tags \"@test\" --format ./features/support/reporter/stage-reporter.js",
+    "e2e-prod": "./node_modules/.bin/cucumber-js --tags \"@test\" --format ./features/support/reporter/prod-reporter.js",
+    "lint-e2e": "./node_modules/.bin/cucumber-js --tags \"@test\""
   },
   "keywords": [
     "cucumberjs",
@@ -18,14 +21,19 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "chai": "^1.10.0",
-    "@cucumber/cucumber": "^7.3.1",
-    "express": "^4.15.4",
+    "@cucumber/cucumber": "^8.5.1",
+    "@cucumber/gherkin": "^24.0.0",
+    "@cucumber/gherkin-streams": "^5.0.1",
+    "@cucumber/gherkin-utils": "^8.0.0",
+    "@cucumber/messages": "^19.1.2",
+    "allure-cucumberjs": "^2.0.0-beta.19",
+    "chai": "^4.3.6",
+    "express": "^4.18.1",
     "fs": "0.0.1-security",
-    "node-rest-client": "^3.1.0",
+    "node-rest-client": "^3.1.1",
     "request": "^2.81.0",
-    "selenium-webdriver": "^4.0.0-beta.4",
-    "zombie": "^5.0.7"
+    "selenium-webdriver": "^4.4.0",
+    "zombie": "^6.1.4"
   },
   "engines": {
     "node": ">=0.10.0"

@@ -62,6 +62,7 @@ pipeline {
                 sh "mkdir allure-results"
                 sh 'npm install'
                 sh 'npm run e2e-test'
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
         stage('TAG Stage Environment Stack') {
